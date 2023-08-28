@@ -114,7 +114,7 @@ const getQuestions = (_: Request, res: Response) => {
 		});
 	} catch (error) {
 		return res.status(400).json({
-			message: 'There was an issue getting questions'
+			errorMessage: 'There was an issue getting questions'
 		});
 	}
 };
@@ -130,7 +130,7 @@ const submitQuestionnaire = (req: Request, res: Response) => {
 		});
 	} catch (error) {
 		return res.status(400).json({
-			message: 'There was an issue submitting questionnaire'
+			errorMessage: 'There was an issue submitting questionnaire'
 		});
 	}
 };
