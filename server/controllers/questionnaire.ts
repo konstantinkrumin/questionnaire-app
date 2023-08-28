@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 const getQuestions = (req: Request, res: Response) => {
 	try {
 		return res.json({
-			test: 'YOOO'
+			test: 'Get is working'
 		});
 	} catch (error) {
 		return res.json({
@@ -15,7 +15,7 @@ const getQuestions = (req: Request, res: Response) => {
 const submitQuestionnaire = (req: Request, res: Response) => {
 	try {
 		return res.json({
-			test: 'YOOO'
+			test: 'Submit is working'
 		});
 	} catch (error) {
 		return res.json({
