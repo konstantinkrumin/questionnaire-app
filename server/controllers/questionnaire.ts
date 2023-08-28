@@ -122,11 +122,10 @@ const getQuestions = (_: Request, res: Response) => {
 const submitQuestionnaire = (req: Request, res: Response) => {
 	const body: QuestionnaireResponseBody = req.body;
 
-	console.log(body);
-
 	try {
 		return res.status(201).json({
 			message: 'Questionnaire has been successfully submitted',
+			answers: body.answers,
 			userId: body.userId
 		});
 	} catch (error) {

@@ -11,6 +11,9 @@ const API_PREFIX = '/api/v1';
 const app: Application = express();
 const port = process.env.PORT || 8000;
 
+// Middleware to parse JSON request bodies
+app.use(express.json());
+
 app.use(API_PREFIX, questionnaireRoutes);
 
 app.get('/', (_: Request, res: Response) => {
