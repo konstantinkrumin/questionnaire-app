@@ -4,10 +4,18 @@ export enum QuestionType {
 	MultipleChoice = 'multiple'
 }
 
-export type Question = {
-	id: string;
+interface Question {
+	id: number;
 	text: string;
 	type: QuestionType;
-	answerOptions: string[];
 	isRequired: boolean;
-};
+}
+
+export interface QuestionTextual extends Question {
+	type: QuestionType.Text;
+}
+
+export interface QuestionPredefined extends Question {
+	type: QuestionType.SingleChoice | QuestionType.MultipleChoice;
+	answerOptions: string[];
+}

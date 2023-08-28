@@ -1,27 +1,109 @@
 import { Request, Response } from 'express';
 
-import { Question, QuestionType } from '../types';
+import { QuestionTextual, QuestionPredefined, QuestionType } from '../types';
 
 const getQuestions = (_: Request, res: Response) => {
-	const questions: Question[] = [
+	const textualQuestions: QuestionTextual[] = [
 		{
-			id: 'q1',
-			text: 'Test Question',
+			id: 1,
+			text: 'What is your full name?',
 			type: QuestionType.Text,
-			isRequired: true,
-			answerOptions: ['A1', 'A2']
+			isRequired: true
 		},
 		{
-			id: 'q2',
-			text: 'Test Question 2',
+			id: 2,
+			text: 'What is your current job title?',
 			type: QuestionType.Text,
-			isRequired: true,
-			answerOptions: ['B1', 'B2']
+			isRequired: true
+		},
+		{
+			id: 7,
+			text: 'Tell us what drives you daily?',
+			type: QuestionType.Text,
+			isRequired: true
+		},
+		{
+			id: 8,
+			text: 'Is there anything else you would like to share with us?',
+			type: QuestionType.Text,
+			isRequired: false
 		}
 	];
 
+	const predefinedQuestions: QuestionPredefined[] = [
+		{
+			id: 3,
+			text: 'For which position are you applying?',
+			type: QuestionType.SingleChoice,
+			isRequired: true,
+			answerOptions: [
+				'Backend Engineer',
+				'Frontend Engineer',
+				'Fullstack Engineer',
+				'DevOps Engineer',
+				'Frontend Team Lead',
+				'Engineering Manager'
+			]
+		},
+		{
+			id: 4,
+			text: 'Which team would you like to work for?',
+			type: QuestionType.MultipleChoice,
+			isRequired: false,
+			answerOptions: ['Core', 'Analytics', 'Integrations']
+		},
+		{
+			id: 5,
+			text: 'Which languages have you worked with?',
+			type: QuestionType.MultipleChoice,
+			isRequired: true,
+			answerOptions: [
+				'Javascript',
+				'Typescript',
+				'Python',
+				'Java',
+				'C#',
+				'C++',
+				'C',
+				'Elixir',
+				'Erlang',
+				'Rust',
+				'Scala',
+				'Go'
+			]
+		},
+		{
+			id: 6,
+			text: 'Which technologies have you worked with?',
+			type: QuestionType.MultipleChoice,
+			isRequired: true,
+			answerOptions: [
+				'ExpressJS',
+				'NestJS',
+				'React',
+				'NextJS',
+				'VueJS',
+				'Angular',
+				'CSS / SCSS',
+				'Material UI',
+				'.NET Core',
+				'Spring Boot',
+				'Phoenix',
+				'MongoDB',
+				'PostgreSQL',
+				'MySQL',
+				'GraphQL'
+			]
+		}
+	];
+
+	const questions: (QuestionTextual | QuestionPredefined)[] = [
+		...textualQuestions,
+		...predefinedQuestions
+	].sort((a, b) => a.id - b.id);
+
 	try {
-		return res.json({
+		return res.status(200).json({
 			questions,
 			count: questions?.length
 		});
