@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
 
 import {
-	QuestionTextual,
-	QuestionPredefined,
+	IQuestionTextual,
+	IQuestionPredefined,
 	QuestionType,
-	QuestionnaireResponseBody,
+	IQuestionnaireResponseBody,
 	DisplayStyleType,
 	IQuestion
 } from '../types';
 
 const getQuestions = (_: Request, res: Response) => {
-	const textualQuestions: QuestionTextual[] = [
+	const textualQuestions: IQuestionTextual[] = [
 		{
 			id: 1,
 			text: 'What is your full name?',
@@ -41,7 +41,7 @@ const getQuestions = (_: Request, res: Response) => {
 		}
 	];
 
-	const predefinedQuestions: QuestionPredefined[] = [
+	const predefinedQuestions: IQuestionPredefined[] = [
 		{
 			id: 3,
 			text: 'For which position are you applying?',
@@ -129,7 +129,7 @@ const getQuestions = (_: Request, res: Response) => {
 };
 
 const submitQuestionnaire = (req: Request, res: Response) => {
-	const body: QuestionnaireResponseBody = req.body;
+	const body: IQuestionnaireResponseBody = req.body;
 
 	try {
 		return res.status(201).json({

@@ -6,4 +6,4 @@ export interface IGetQuestionsRes {
 	errorMessage?: string;
 }
 
-export type GetQuestions = () => Promise<IGetQuestionsRes>;
+export type IGetQuestions = () => Promise<IGetQuestionsRes>;

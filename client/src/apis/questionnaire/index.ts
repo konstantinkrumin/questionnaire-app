@@ -1,7 +1,7 @@
 import { serverAxios } from '../axios';
-import { GetQuestions, IGetQuestionsRes } from './types';
+import { IGetQuestions, IGetQuestionsRes } from './types';
 
-export const getQuestions: GetQuestions = async () => {
+export const getQuestions: IGetQuestions = async () => {
 	return await serverAxios
 		.get<IGetQuestionsRes>('/questionnaire')
 		.then(response => response.data)
