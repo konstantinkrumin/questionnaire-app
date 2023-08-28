@@ -15,11 +15,11 @@ export enum DisplayStyleType {
 interface IQuestionBase {
 	id: number;
 	text: string;
-	type: QuestionType;
 	isRequired: boolean;
 }
 
 export interface IQuestionTextual extends IQuestionBase {
+	answerOptions?: undefined;
 	type: QuestionType.Text;
 	displayStyle: DisplayStyleType.Textfield | DisplayStyleType.Textarea;
 }
