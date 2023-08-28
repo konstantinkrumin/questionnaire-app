@@ -1,25 +1,45 @@
 import { Request, Response } from 'express';
 
-const getQuestions = (req: Request, res: Response) => {
+import { Question, QuestionType } from '../types';
+
+const getQuestions = (_: Request, res: Response) => {
+	const questions: Question[] = [
+		{
+			id: 'q1',
+			text: 'Test Question',
+			type: QuestionType.Text,
+			isRequired: true,
+			answerOptions: ['A1', 'A2']
+		},
+		{
+			id: 'q2',
+			text: 'Test Question 2',
+			type: QuestionType.Text,
+			isRequired: true,
+			answerOptions: ['B1', 'B2']
+		}
+	];
+
 	try {
 		return res.json({
-			test: 'Get is working'
+			questions,
+			count: questions?.length
 		});
 	} catch (error) {
-		return res.json({
-			test: 'Houston we have a problem'
+		return res.status(400).json({
+			message: 'There was an issue getting questions'
 		});
 	}
 };
 
-const submitQuestionnaire = (req: Request, res: Response) => {
+const submitQuestionnaire = (_: Request, res: Response) => {
 	try {
-		return res.json({
-			test: 'Submit is working'
+		return res.status(201).json({
+			message: 'Questionnaire has been successfully submitted'
 		});
 	} catch (error) {
-		return res.json({
-			test: 'Houston we have a problem'
+		return res.status(400).json({
+			message: 'There was an issue submitting questionnaire'
 		});
 	}
 };
