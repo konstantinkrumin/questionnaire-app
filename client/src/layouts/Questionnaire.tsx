@@ -10,10 +10,14 @@ interface QuestionnaireProps {}
 const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	const [questions, setQuestions] = useState<IQuestion[]>();
 
+	// const [currentStep, setCurrentStep] = useState<number>(1);
+	const [questionsCount, setQuestionsCount] = useState<number>();
+
 	useEffect(() => {
 		getQuestions()
 			.then(result => {
 				setQuestions(result.questions);
+				setQuestionsCount(result.count);
 			})
 			.catch(err => console.log(err));
 	}, []);
@@ -23,11 +27,13 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 			<div>Questionnaire Title</div>
 
 			{questions?.map(question => {
-				return <Question key={question.id} />;
+				return <Question key={question.id} questionInfo={question} />;
 			})}
 
 			<Button variant="contained">Previous</Button>
 			<Button variant="contained">Next</Button>
+
+			<div>Total Questions: {questionsCount}</div>
 		</>
 	);
 };

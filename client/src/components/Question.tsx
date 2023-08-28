@@ -1,7 +1,15 @@
-interface QuestionProps {}
+import { IQuestion } from '../types';
 
-const Question: React.FC<QuestionProps> = () => {
-	return <div>Question Component will be set up here</div>;
+interface QuestionProps {
+	questionInfo: IQuestion;
+}
+
+const Question: React.FC<QuestionProps> = ({ questionInfo }) => {
+	return (
+		<>
+			<div>{questionInfo.text}</div>
+		</>
+	);
 };
 
 export default Question;
