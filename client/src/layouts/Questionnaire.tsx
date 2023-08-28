@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 import Question from '../components/Question';
 import { getQuestions } from '../apis/questionnaire';
@@ -24,7 +25,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 
 	return (
 		<>
-			<div>Questionnaire Title</div>
+			<Typography variant="h5">Questionnaire Title</Typography>
 
 			{questions?.map(question => {
 				return <Question key={question.id} questionInfo={question} />;
