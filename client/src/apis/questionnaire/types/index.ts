@@ -1,7 +1,7 @@
-import { QuestionPredefined, QuestionTextual } from '../../../types';
+import { Question } from '../../../types';
 
 export interface IGetQuestionsRes {
-	questions?: (QuestionTextual | QuestionPredefined)[];
+	questions?: Question[];
 	count?: number;
 	errorMessage?: string;
 }

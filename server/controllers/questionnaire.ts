@@ -5,7 +5,8 @@ import {
 	QuestionPredefined,
 	QuestionType,
 	QuestionnaireResponseBody,
-	DisplayStyleType
+	DisplayStyleType,
+	Question
 } from '../types';
 
 const getQuestions = (_: Request, res: Response) => {
@@ -111,10 +112,9 @@ const getQuestions = (_: Request, res: Response) => {
 		}
 	];
 
-	const questions: (QuestionTextual | QuestionPredefined)[] = [
-		...textualQuestions,
-		...predefinedQuestions
-	].sort((a, b) => a.id - b.id);
+	const questions: Question[] = [...textualQuestions, ...predefinedQuestions].sort(
+		(a, b) => a.id - b.id
+	);
 
 	try {
 		return res.status(200).json({

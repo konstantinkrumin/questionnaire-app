@@ -12,23 +12,25 @@ export enum DisplayStyleType {
 	Radio = 'radio'
 }
 
-interface Question {
+interface QuestionBase {
 	id: number;
 	text: string;
 	type: QuestionType;
 	isRequired: boolean;
 }
 
-export interface QuestionTextual extends Question {
+export interface QuestionTextual extends QuestionBase {
 	type: QuestionType.Text;
 	displayStyle: DisplayStyleType.Textfield | DisplayStyleType.Textarea;
 }
 
-export interface QuestionPredefined extends Question {
+export interface QuestionPredefined extends QuestionBase {
 	answerOptions: string[];
 	type: QuestionType.SingleChoice | QuestionType.MultipleChoice;
 	displayStyle: DisplayStyleType.Dropdown | DisplayStyleType.Checkbox | DisplayStyleType.Radio;
 }
+
+export type Question = QuestionTextual | QuestionPredefined;
 
 export interface QuestionnaireAnswer {
 	questionId: number;

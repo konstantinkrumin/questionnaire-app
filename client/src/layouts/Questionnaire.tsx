@@ -7,10 +7,12 @@ import { getQuestions } from '../apis/questionnaire';
 interface QuestionnaireProps {}
 
 const Questionnaire: React.FC<QuestionnaireProps> = () => {
+	// const [] = useState<>;
+
 	useEffect(() => {
 		getQuestions()
 			.then(result => {
-				console.log(result);
+				console.log(result.questions);
 			})
 			.catch(err => console.log(err));
 	}, []);
