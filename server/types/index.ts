@@ -30,7 +30,7 @@ export interface QuestionPredefined extends QuestionBase {
 	displayStyle: DisplayStyleType.Dropdown | DisplayStyleType.Checkbox | DisplayStyleType.Radio;
 }
 
-export type Question = QuestionTextual | QuestionPredefined;
+export type IQuestion = QuestionTextual | QuestionPredefined;
 
 export interface QuestionnaireAnswer {
 	questionId: number;

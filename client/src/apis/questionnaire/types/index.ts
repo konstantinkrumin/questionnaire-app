@@ -1,7 +1,7 @@
-import { Question } from '../../../types';
+import { IQuestion } from '../../../types';
 
 export interface IGetQuestionsRes {
-	questions?: Question[];
+	questions?: IQuestion[];
 	count?: number;
 	errorMessage?: string;
 }

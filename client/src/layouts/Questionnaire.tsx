@@ -1,18 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 
 import Question from '../components/Question';
 import { getQuestions } from '../apis/questionnaire';
+import { IQuestion } from '../types';
 
 interface QuestionnaireProps {}
 
 const Questionnaire: React.FC<QuestionnaireProps> = () => {
-	// const [] = useState<>;
+	const [questions, setQuestions] = useState<IQuestion[]>();
 
 	useEffect(() => {
 		getQuestions()
 			.then(result => {
-				console.log(result.questions);
+				setQuestions(result.questions);
 			})
 			.catch(err => console.log(err));
 	}, []);
@@ -21,9 +22,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 		<>
 			<div>Questionnaire Title</div>
 
-			<Question />
-			<Question />
-			<Question />
+			{questions?.map(question => {
+				return <Question key={question.id} />;
+			})}
 
 			<Button variant="contained">Previous</Button>
 			<Button variant="contained">Next</Button>

@@ -6,7 +6,7 @@ import {
 	QuestionType,
 	QuestionnaireResponseBody,
 	DisplayStyleType,
-	Question
+	IQuestion
 } from '../types';
 
 const getQuestions = (_: Request, res: Response) => {
@@ -112,7 +112,7 @@ const getQuestions = (_: Request, res: Response) => {
 		}
 	];
 
-	const questions: Question[] = [...textualQuestions, ...predefinedQuestions].sort(
+	const questions: IQuestion[] = [...textualQuestions, ...predefinedQuestions].sort(
 		(a, b) => a.id - b.id
 	);
 
