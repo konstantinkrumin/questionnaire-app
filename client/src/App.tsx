@@ -1,5 +1,6 @@
-import { Button } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+
+import Questionnaire from './layouts/Questionnaire';
 
 function App() {
 	console.log('Hello');
@@ -7,7 +8,7 @@ function App() {
 	return (
 		<>
 			<CssBaseline />
-			<Button variant="contained">Hello world</Button>
+			<Questionnaire />
 		</>
 	);
 }
