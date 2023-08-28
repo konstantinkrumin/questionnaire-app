@@ -4,6 +4,14 @@ export enum QuestionType {
 	MultipleChoice = 'multiple'
 }
 
+export enum DisplayStyleType {
+	Textfield = 'textfield',
+	Textarea = 'textarea',
+	Dropdown = 'dropdown',
+	Checkbox = 'checkbox',
+	Radio = 'radio'
+}
+
 interface Question {
 	id: number;
 	text: string;
@@ -13,11 +21,13 @@ interface Question {
 
 export interface QuestionTextual extends Question {
 	type: QuestionType.Text;
+	displayStyle: DisplayStyleType.Textfield | DisplayStyleType.Textarea;
 }
 
 export interface QuestionPredefined extends Question {
-	type: QuestionType.SingleChoice | QuestionType.MultipleChoice;
 	answerOptions: string[];
+	type: QuestionType.SingleChoice | QuestionType.MultipleChoice;
+	displayStyle: DisplayStyleType.Dropdown | DisplayStyleType.Checkbox | DisplayStyleType.Radio;
 }
 
 export interface QuestionnaireAnswer {

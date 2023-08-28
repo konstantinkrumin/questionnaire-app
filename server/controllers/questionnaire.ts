@@ -4,7 +4,8 @@ import {
 	QuestionTextual,
 	QuestionPredefined,
 	QuestionType,
-	QuestionnaireResponseBody
+	QuestionnaireResponseBody,
+	DisplayStyleType
 } from '../types';
 
 const getQuestions = (_: Request, res: Response) => {
@@ -12,24 +13,28 @@ const getQuestions = (_: Request, res: Response) => {
 		{
 			id: 1,
 			text: 'What is your full name?',
+			displayStyle: DisplayStyleType.Textfield,
 			type: QuestionType.Text,
 			isRequired: true
 		},
 		{
 			id: 2,
 			text: 'What is your current job title?',
+			displayStyle: DisplayStyleType.Textfield,
 			type: QuestionType.Text,
 			isRequired: true
 		},
 		{
 			id: 7,
 			text: 'Tell us what drives you daily?',
+			displayStyle: DisplayStyleType.Textarea,
 			type: QuestionType.Text,
 			isRequired: true
 		},
 		{
 			id: 8,
 			text: 'Is there anything else you would like to share with us?',
+			displayStyle: DisplayStyleType.Textarea,
 			type: QuestionType.Text,
 			isRequired: false
 		}
@@ -39,6 +44,7 @@ const getQuestions = (_: Request, res: Response) => {
 		{
 			id: 3,
 			text: 'For which position are you applying?',
+			displayStyle: DisplayStyleType.Dropdown,
 			type: QuestionType.SingleChoice,
 			isRequired: true,
 			answerOptions: [
@@ -53,13 +59,15 @@ const getQuestions = (_: Request, res: Response) => {
 		{
 			id: 4,
 			text: 'Which team would you like to work for?',
-			type: QuestionType.MultipleChoice,
+			displayStyle: DisplayStyleType.Radio,
+			type: QuestionType.SingleChoice,
 			isRequired: false,
 			answerOptions: ['Core', 'Analytics', 'Integrations']
 		},
 		{
 			id: 5,
-			text: 'Which languages have you worked with?',
+			text: 'Which programming languages have you worked with?',
+			displayStyle: DisplayStyleType.Checkbox,
 			type: QuestionType.MultipleChoice,
 			isRequired: true,
 			answerOptions: [
@@ -80,6 +88,7 @@ const getQuestions = (_: Request, res: Response) => {
 		{
 			id: 6,
 			text: 'Which technologies have you worked with?',
+			displayStyle: DisplayStyleType.Checkbox,
 			type: QuestionType.MultipleChoice,
 			isRequired: true,
 			answerOptions: [
