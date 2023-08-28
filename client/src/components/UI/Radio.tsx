@@ -13,7 +13,9 @@ interface RadioButtonsGroupProps {
 const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({ questionInfo }) => {
 	return (
 		<FormControl>
-			<FormLabel id="radio-buttons-group-label">{questionInfo.text}</FormLabel>
+			<FormLabel id="radio-buttons-group-label" hidden>
+				{questionInfo.text}
+			</FormLabel>
 			<RadioGroup
 				aria-labelledby="radio-buttons-group-label"
 				defaultValue={questionInfo?.answerOptions?.[0]}
