@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
 
-import { QuestionTextual, QuestionPredefined, QuestionType } from '../types';
+import {
+	QuestionTextual,
+	QuestionPredefined,
+	QuestionType,
+	QuestionnaireResponseBody
+} from '../types';
 
 const getQuestions = (_: Request, res: Response) => {
 	const textualQuestions: QuestionTextual[] = [
@@ -114,10 +119,15 @@ const getQuestions = (_: Request, res: Response) => {
 	}
 };
 
-const submitQuestionnaire = (_: Request, res: Response) => {
+const submitQuestionnaire = (req: Request, res: Response) => {
+	const body: QuestionnaireResponseBody = req.body;
+
+	console.log(body);
+
 	try {
 		return res.status(201).json({
-			message: 'Questionnaire has been successfully submitted'
+			message: 'Questionnaire has been successfully submitted',
+			userId: body.userId
 		});
 	} catch (error) {
 		return res.status(400).json({

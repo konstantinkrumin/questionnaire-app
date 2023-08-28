@@ -19,3 +19,13 @@ export interface QuestionPredefined extends Question {
 	type: QuestionType.SingleChoice | QuestionType.MultipleChoice;
 	answerOptions: string[];
 }
+
+export interface QuestionnaireAnswer {
+	questionId: number;
+	answer: string | string[];
+}
+
+export interface QuestionnaireResponseBody {
+	userId: number;
+	answers: QuestionnaireAnswer[];
+}

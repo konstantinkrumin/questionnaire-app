@@ -6,6 +6,6 @@ const router: Router = express.Router();
 
 router.get('/questionnaire', questionnaire.getQuestions);
 
-router.post('/questionnaire', questionnaire.submitQuestionnaire);
+router.post('/questionnaire/:userId', questionnaire.submitQuestionnaire);
 
 export default router;
