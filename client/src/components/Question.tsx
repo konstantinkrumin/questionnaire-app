@@ -15,9 +15,11 @@ interface QuestionProps {
 
 const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 	const [input, setInput] = useState<string>('');
+	const [options, setOptions] = useState<string[]>([]);
 
 	const handleStepChange = (type: 'next' | 'previous') => {
 		setInput('');
+		setOptions([]);
 		onStepChange(type);
 	};
 
@@ -25,9 +27,13 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 		setInput(input);
 	};
 
+	const handleSelectedOptionsChange = (selectedOptions: string[]) => {
+		setOptions(selectedOptions);
+	};
+
 	return (
 		<>
-			{console.log(input)}
+			{console.log(options)}
 			<Typography variant="h6">{questionInfo?.text}</Typography>
 
 			{questionInfo?.displayStyle === DisplayStyleType.Radio && (
@@ -39,7 +45,11 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 			)}
 
 			{questionInfo?.displayStyle === DisplayStyleType.Checkbox && (
-				<CheckboxGroup questionInfo={questionInfo} />
+				<CheckboxGroup
+					selectedOptions={options}
+					questionInfo={questionInfo}
+					onSelectedOptionsChange={handleSelectedOptionsChange}
+				/>
 			)}
 
 			{questionInfo?.displayStyle === DisplayStyleType.Dropdown && (
