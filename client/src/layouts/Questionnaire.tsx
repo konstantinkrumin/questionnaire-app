@@ -51,7 +51,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	};
 
 	if (isLoading) {
-		return <div>Loading</div>;
+		return <Typography variant="h5">Loading</Typography>;
 	}
 
 	if (!questions) {
@@ -60,8 +60,6 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 
 	return (
 		<>
-			{console.log('final')}
-			{console.log(answers)}
 			<Typography variant="h5">Questionnaire Title</Typography>
 
 			<Question questionInfo={questions[currentStep - 1]} onStepChange={handleStepChange} />
