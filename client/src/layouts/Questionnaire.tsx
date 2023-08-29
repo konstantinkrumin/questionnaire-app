@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import Question from '../components/Question';
@@ -11,28 +10,32 @@ interface QuestionnaireProps {}
 const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	const [questions, setQuestions] = useState<IQuestion[]>();
 
-	// const [currentStep, setCurrentStep] = useState<number>(1);
-	const [questionsCount, setQuestionsCount] = useState<number>();
+	const [currentStep, setCurrentStep] = useState<number>(1);
+	const [questionsCount, setQuestionsCount] = useState<number>(0);
 
 	useEffect(() => {
 		getQuestions()
 			.then(result => {
-				setQuestions(result.questions);
-				setQuestionsCount(result.count);
+				if (result.questions) setQuestions(result.questions);
+				if (result.count) setQuestionsCount(result.count);
 			})
 			.catch(err => console.log(err));
 	}, []);
+
+	const handleStepChange = (type: 'next' | 'previous') => {
+		if (type === 'next' && currentStep < questionsCount) setCurrentStep(currentStep + 1);
+		if (type === 'previous' && currentStep > 1) setCurrentStep(currentStep - 1);
+	};
+
+	if (!questions) {
+		return <div>Loading</div>;
+	}
 
 	return (
 		<>
 			<Typography variant="h5">Questionnaire Title</Typography>
 
-			{questions?.map(question => {
-				return <Question key={question.id} questionInfo={question} />;
-			})}
-
-			<Button variant="contained">Previous</Button>
-			<Button variant="contained">Next</Button>
+			<Question questionInfo={questions[currentStep - 1]} onStepChange={handleStepChange} />
 
 			<div>Total Questions: {questionsCount}</div>
 		</>
