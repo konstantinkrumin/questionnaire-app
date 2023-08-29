@@ -4,6 +4,7 @@ import { IQuestion, DisplayStyleType } from '../types';
 import RadioButtonsGroup from './UI/Radio';
 import Textfield from './UI/Textfield';
 import Dropdown from './UI/Dropdown';
+import CheckboxGroup from './UI/Checkbox';
 
 interface QuestionProps {
 	questionInfo: IQuestion;
@@ -13,13 +14,13 @@ const Question: React.FC<QuestionProps> = ({ questionInfo }) => {
 	return (
 		<>
 			<Typography variant="h6">{questionInfo?.text}</Typography>
-			<div>{questionInfo?.isRequired}</div>
-			<div>{questionInfo?.type}</div>
-			<div>{questionInfo?.displayStyle}</div>
-			<div>{questionInfo?.answerOptions}</div>
 
 			{questionInfo?.displayStyle === DisplayStyleType.Radio && (
 				<RadioButtonsGroup questionInfo={questionInfo} />
+			)}
+
+			{questionInfo?.displayStyle === DisplayStyleType.Checkbox && (
+				<CheckboxGroup questionInfo={questionInfo} />
 			)}
 
 			{questionInfo?.displayStyle === DisplayStyleType.Dropdown && (
