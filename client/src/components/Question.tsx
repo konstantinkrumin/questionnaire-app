@@ -43,7 +43,11 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 			)}
 
 			{questionInfo?.displayStyle === DisplayStyleType.Dropdown && (
-				<Dropdown questionInfo={questionInfo} />
+				<Dropdown
+					input={input}
+					questionInfo={questionInfo}
+					onInputChange={handleInputChange}
+				/>
 			)}
 
 			{(questionInfo?.displayStyle === DisplayStyleType.Textfield ||

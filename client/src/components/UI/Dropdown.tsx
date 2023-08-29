@@ -3,15 +3,21 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { IQuestion } from '../../types';
 
 interface DropdownProps {
+	input: string;
 	questionInfo: IQuestion;
+	onInputChange: (input: string) => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ questionInfo }) => {
+const Dropdown: React.FC<DropdownProps> = ({ input, questionInfo, onInputChange }) => {
+	const handleInputChange = (event: SelectChangeEvent) => {
+		onInputChange(event.target.value);
+	};
+
 	return (
 		<Box sx={{ minWidth: 120 }}>
 			<FormControl fullWidth>
@@ -19,9 +25,9 @@ const Dropdown: React.FC<DropdownProps> = ({ questionInfo }) => {
 				<Select
 					id="select"
 					labelId="select-label"
-					value={questionInfo?.answerOptions?.[0]}
-					label="Age"
-					onChange={() => {}}
+					value={input}
+					// label="Age"
+					onChange={handleInputChange}
 				>
 					{questionInfo?.answerOptions?.map((answerOption, idx) => {
 						return (
