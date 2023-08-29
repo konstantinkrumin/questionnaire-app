@@ -10,7 +10,7 @@ import CheckboxGroup from './UI/Checkbox';
 
 interface QuestionProps {
 	questionInfo: IQuestion;
-	onStepChange: (type: 'next' | 'back') => void;
+	onStepChange: (type: 'next' | 'back', questionAnswer: IQuestionnaireAnswer) => void;
 }
 
 const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
@@ -24,10 +24,8 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 			answer: input
 		};
 
-		console.log(questionAnswer);
-
 		setInput(DEFAULT_INPUT);
-		onStepChange(type);
+		onStepChange(type, questionAnswer);
 	};
 
 	const handleInputChange = (newInput: string | string[]) => {
