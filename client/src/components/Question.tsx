@@ -10,7 +10,7 @@ import CheckboxGroup from './UI/Checkbox';
 
 interface QuestionProps {
 	questionInfo: IQuestion;
-	onStepChange: (type: 'next' | 'previous') => void;
+	onStepChange: (type: 'next' | 'back') => void;
 }
 
 const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
@@ -18,7 +18,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 
 	const [input, setInput] = useState<string | string[]>(DEFAULT_INPUT);
 
-	const handleStepChange = (type: 'next' | 'previous') => {
+	const handleStepChange = (type: 'next' | 'back') => {
 		setInput(DEFAULT_INPUT);
 		onStepChange(type);
 	};
@@ -62,8 +62,8 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 			)}
 
 			<div>
-				<Button variant="contained" onClick={() => handleStepChange('previous')}>
-					Previous
+				<Button variant="contained" onClick={() => handleStepChange('back')}>
+					Back
 				</Button>
 
 				<Button variant="contained" onClick={() => handleStepChange('next')}>

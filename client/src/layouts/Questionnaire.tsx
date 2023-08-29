@@ -33,9 +33,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 			});
 	}, []);
 
-	const handleStepChange = (type: 'next' | 'previous') => {
+	const handleStepChange = (type: 'next' | 'back') => {
 		if (type === 'next' && currentStep < questionsCount) setCurrentStep(currentStep + 1);
-		if (type === 'previous' && currentStep > 1) setCurrentStep(currentStep - 1);
+		if (type === 'back' && currentStep > 1) setCurrentStep(currentStep - 1);
 	};
 
 	if (isLoading) {
