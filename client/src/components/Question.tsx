@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import { IQuestion, DisplayStyleType, QuestionType } from '../types';
+import { IQuestion, DisplayStyleType, QuestionType, IQuestionnaireAnswer } from '../types';
 import RadioButtonsGroup from './UI/Radio';
 import Textfield from './UI/Textfield';
 import Dropdown from './UI/Dropdown';
@@ -19,6 +19,13 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 	const [input, setInput] = useState<string | string[]>(DEFAULT_INPUT);
 
 	const handleStepChange = (type: 'next' | 'back') => {
+		const questionAnswer: IQuestionnaireAnswer = {
+			questionId: questionInfo.id,
+			answer: input
+		};
+
+		console.log(questionAnswer);
+
 		setInput(DEFAULT_INPUT);
 		onStepChange(type);
 	};
@@ -27,9 +34,13 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 		setInput(newInput);
 	};
 
+	const disableNextBtn = (isRequired: boolean, currentInputState: string | string[]) => {
+		if (!currentInputState && isRequired) return true;
+		return false;
+	};
+
 	return (
 		<>
-			{console.log(input)}
 			<Typography variant="h6">{questionInfo?.text}</Typography>
 
 			{questionInfo.displayStyle === DisplayStyleType.Radio && (
@@ -66,7 +77,11 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 					Back
 				</Button>
 
-				<Button variant="contained" onClick={() => handleStepChange('next')}>
+				<Button
+					variant="contained"
+					disabled={disableNextBtn(questionInfo.isRequired, input)}
+					onClick={() => handleStepChange('next')}
+				>
 					Next
 				</Button>
 			</div>
