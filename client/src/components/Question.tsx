@@ -36,12 +36,15 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 			{(questionInfo?.displayStyle === DisplayStyleType.Textfield ||
 				questionInfo?.displayStyle === DisplayStyleType.Textarea) && <Textfield />}
 
-			<Button variant="contained" onClick={() => handleStepChange('previous')}>
-				Previous
-			</Button>
-			<Button variant="contained" onClick={() => handleStepChange('next')}>
-				Next
-			</Button>
+			<div>
+				<Button variant="contained" onClick={() => handleStepChange('previous')}>
+					Previous
+				</Button>
+
+				<Button variant="contained" onClick={() => handleStepChange('next')}>
+					Next
+				</Button>
+			</div>
 		</>
 	);
 };

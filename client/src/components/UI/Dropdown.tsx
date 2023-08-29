@@ -15,9 +15,7 @@ const Dropdown: React.FC<DropdownProps> = ({ questionInfo }) => {
 	return (
 		<Box sx={{ minWidth: 120 }}>
 			<FormControl fullWidth>
-				<InputLabel id="select-label" hidden>
-					{questionInfo.text}
-				</InputLabel>
+				<InputLabel id="select-label">{questionInfo.text}</InputLabel>
 				<Select
 					id="select"
 					labelId="select-label"
