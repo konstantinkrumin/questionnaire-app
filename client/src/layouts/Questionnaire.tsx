@@ -11,6 +11,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const [questions, setQuestions] = useState<IQuestion[]>();
+	// const [answers, setAnswers] = useState<IQuestionnaireAnswer[]>();
 
 	const [currentStep, setCurrentStep] = useState<number>(1);
 	const [questionsCount, setQuestionsCount] = useState<number>(0);

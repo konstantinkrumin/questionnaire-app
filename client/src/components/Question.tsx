@@ -1,5 +1,6 @@
-import Typography from '@mui/material/Typography';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 import { IQuestion, DisplayStyleType } from '../types';
 import RadioButtonsGroup from './UI/Radio';
@@ -13,16 +14,28 @@ interface QuestionProps {
 }
 
 const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
+	const [input, setInput] = useState<string>('');
+
 	const handleStepChange = (type: 'next' | 'previous') => {
+		setInput('');
 		onStepChange(type);
+	};
+
+	const handleInputChange = (input: string) => {
+		setInput(input);
 	};
 
 	return (
 		<>
+			{console.log(input)}
 			<Typography variant="h6">{questionInfo?.text}</Typography>
 
 			{questionInfo?.displayStyle === DisplayStyleType.Radio && (
-				<RadioButtonsGroup questionInfo={questionInfo} />
+				<RadioButtonsGroup
+					input={input}
+					questionInfo={questionInfo}
+					onInputChange={handleInputChange}
+				/>
 			)}
 
 			{questionInfo?.displayStyle === DisplayStyleType.Checkbox && (
@@ -34,7 +47,9 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 			)}
 
 			{(questionInfo?.displayStyle === DisplayStyleType.Textfield ||
-				questionInfo?.displayStyle === DisplayStyleType.Textarea) && <Textfield />}
+				questionInfo?.displayStyle === DisplayStyleType.Textarea) && (
+				<Textfield input={input} onInputChange={handleInputChange} />
+			)}
 
 			<div>
 				<Button variant="contained" onClick={() => handleStepChange('previous')}>

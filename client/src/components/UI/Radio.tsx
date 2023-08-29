@@ -7,19 +7,31 @@ import FormLabel from '@mui/material/FormLabel';
 import { IQuestion } from '../../types';
 
 interface RadioButtonsGroupProps {
+	input: string;
 	questionInfo: IQuestion;
+	onInputChange: (input: string) => void;
 }
 
-const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({ questionInfo }) => {
+const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({
+	input,
+	questionInfo,
+	onInputChange
+}) => {
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		onInputChange(event.target.value);
+	};
+
 	return (
 		<FormControl>
 			<FormLabel id="radio-buttons-group-label" hidden>
 				{questionInfo.text}
 			</FormLabel>
 			<RadioGroup
+				value={input}
+				name="radio-buttons-group"
 				aria-labelledby="radio-buttons-group-label"
 				defaultValue={questionInfo?.answerOptions?.[0]}
-				name="radio-buttons-group"
+				onChange={handleInputChange}
 			>
 				{questionInfo?.answerOptions?.map((questionOption, idx) => {
 					return (
