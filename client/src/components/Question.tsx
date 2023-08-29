@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import { IQuestion, DisplayStyleType } from '../types';
+import { IQuestion, DisplayStyleType, QuestionType } from '../types';
 import RadioButtonsGroup from './UI/Radio';
 import Textfield from './UI/Textfield';
 import Dropdown from './UI/Dropdown';
@@ -14,55 +14,51 @@ interface QuestionProps {
 }
 
 const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
-	const [input, setInput] = useState<string>('');
-	const [options, setOptions] = useState<string[]>([]);
+	const DEFAULT_INPUT = questionInfo.type === QuestionType.MultipleChoice ? [] : '';
+
+	const [input, setInput] = useState<string | string[]>(DEFAULT_INPUT);
 
 	const handleStepChange = (type: 'next' | 'previous') => {
-		setInput('');
-		setOptions([]);
+		setInput(DEFAULT_INPUT);
 		onStepChange(type);
 	};
 
-	const handleInputChange = (input: string) => {
-		setInput(input);
-	};
-
-	const handleSelectedOptionsChange = (selectedOptions: string[]) => {
-		setOptions(selectedOptions);
+	const handleInputChange = (newInput: string | string[]) => {
+		setInput(newInput);
 	};
 
 	return (
 		<>
-			{console.log(options)}
+			{console.log(input)}
 			<Typography variant="h6">{questionInfo?.text}</Typography>
 
-			{questionInfo?.displayStyle === DisplayStyleType.Radio && (
+			{questionInfo.displayStyle === DisplayStyleType.Radio && (
 				<RadioButtonsGroup
-					input={input}
+					input={input as string}
 					questionInfo={questionInfo}
 					onInputChange={handleInputChange}
 				/>
 			)}
 
-			{questionInfo?.displayStyle === DisplayStyleType.Checkbox && (
+			{questionInfo.displayStyle === DisplayStyleType.Checkbox && (
 				<CheckboxGroup
-					selectedOptions={options}
+					selectedOptions={input as string[]}
 					questionInfo={questionInfo}
-					onSelectedOptionsChange={handleSelectedOptionsChange}
+					onSelectedOptionsChange={handleInputChange}
 				/>
 			)}
 
-			{questionInfo?.displayStyle === DisplayStyleType.Dropdown && (
+			{questionInfo.displayStyle === DisplayStyleType.Dropdown && (
 				<Dropdown
-					input={input}
+					input={input as string}
 					questionInfo={questionInfo}
 					onInputChange={handleInputChange}
 				/>
 			)}
 
-			{(questionInfo?.displayStyle === DisplayStyleType.Textfield ||
-				questionInfo?.displayStyle === DisplayStyleType.Textarea) && (
-				<Textfield input={input} onInputChange={handleInputChange} />
+			{(questionInfo.displayStyle === DisplayStyleType.Textfield ||
+				questionInfo.displayStyle === DisplayStyleType.Textarea) && (
+				<Textfield input={input as string} onInputChange={handleInputChange} />
 			)}
 
 			<div>
