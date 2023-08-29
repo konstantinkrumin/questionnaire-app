@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
@@ -70,7 +71,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 				<Textfield input={input as string} onInputChange={handleInputChange} />
 			)}
 
-			<div>
+			<Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
 				<Button variant="contained" onClick={() => handleStepChange('back')}>
 					Back
 				</Button>
@@ -82,7 +83,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onStepChange }) => {
 				>
 					Next
 				</Button>
-			</div>
+			</Box>
 		</>
 	);
 };
