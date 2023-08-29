@@ -60,13 +60,15 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 
 	return (
 		<>
-			<Typography variant="h5">Questionnaire Title</Typography>
+			<Typography p={2} variant="h5">
+				Questionnaire Title
+			</Typography>
 
 			<Question questionInfo={questions[currentStep - 1]} onStepChange={handleStepChange} />
 
-			<div>
+			<Typography p={2}>
 				Question {currentStep}/{questionsCount}
-			</div>
+			</Typography>
 		</>
 	);
 };
