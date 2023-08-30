@@ -17,7 +17,7 @@ const getQuestions = (_: Request, res: Response) => {
 			displayStyle: DisplayStyleType.Textfield,
 			type: QuestionType.Text,
 			isRequired: true,
-			answer: []
+			answer: ['']
 		},
 		{
 			id: 2,
@@ -25,7 +25,7 @@ const getQuestions = (_: Request, res: Response) => {
 			displayStyle: DisplayStyleType.Textfield,
 			type: QuestionType.Text,
 			isRequired: true,
-			answer: []
+			answer: ['']
 		},
 		{
 			id: 7,
@@ -33,7 +33,7 @@ const getQuestions = (_: Request, res: Response) => {
 			displayStyle: DisplayStyleType.Textarea,
 			type: QuestionType.Text,
 			isRequired: true,
-			answer: []
+			answer: ['']
 		},
 		{
 			id: 8,
@@ -41,7 +41,7 @@ const getQuestions = (_: Request, res: Response) => {
 			displayStyle: DisplayStyleType.Textarea,
 			type: QuestionType.Text,
 			isRequired: false,
-			answer: []
+			answer: ['']
 		}
 	];
 
@@ -60,7 +60,7 @@ const getQuestions = (_: Request, res: Response) => {
 				'Frontend Team Lead',
 				'Engineering Manager'
 			],
-			answer: []
+			answer: ['']
 		},
 		{
 			id: 4,
@@ -69,7 +69,7 @@ const getQuestions = (_: Request, res: Response) => {
 			type: QuestionType.SingleChoice,
 			isRequired: false,
 			answerOptions: ['Core', 'Analytics', 'Integrations'],
-			answer: []
+			answer: ['']
 		},
 		{
 			id: 5,
@@ -91,7 +91,7 @@ const getQuestions = (_: Request, res: Response) => {
 				'Scala',
 				'Go'
 			],
-			answer: []
+			answer: ['']
 		},
 		{
 			id: 6,
@@ -116,7 +116,7 @@ const getQuestions = (_: Request, res: Response) => {
 				'MySQL',
 				'GraphQL'
 			],
-			answer: []
+			answer: ['']
 		}
 	];
 
