@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 
 import Question from '../components/Question';
 import { getQuestions } from '../apis/questionnaire';
-import { IQuestion } from '../types';
+import { IQuestion, IQuestionnaireAnswer, IQuestionnaireResponseBody } from '../types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
@@ -61,6 +61,22 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 		setQuestionnaireData(tempQuestionnaireData);
 	};
 
+	const handleSubmit = () => {
+		const answers: IQuestionnaireAnswer[] = questionnaireData?.map(questionnaireItem => {
+			return {
+				questionId: questionnaireItem.id,
+				answer: questionnaireItem.answer
+			};
+		});
+
+		const responseBody: IQuestionnaireResponseBody = {
+			userId: 123,
+			answers
+		};
+
+		console.log(responseBody);
+	};
+
 	if (isLoading) {
 		return <Typography variant="h5">Loading</Typography>;
 	}
@@ -91,9 +107,17 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 					Back
 				</Button>
 
-				<Button variant="contained" onClick={() => handleNext()}>
-					Next
-				</Button>
+				{currentQuestion < questionsCount - 1 && (
+					<Button variant="contained" onClick={() => handleNext()}>
+						Next
+					</Button>
+				)}
+
+				{currentQuestion === questionsCount - 1 && (
+					<Button variant="contained" onClick={() => handleSubmit()}>
+						Submit
+					</Button>
+				)}
 			</Box>
 
 			<Typography p={2}>

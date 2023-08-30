@@ -35,7 +35,7 @@ export type IQuestion = IQuestionTextual | IQuestionPredefined;
 
 export interface IQuestionnaireAnswer {
 	questionId: number;
-	answer: string | string[];
+	answer: string[];
 }
 
 export interface IQuestionnaireResponseBody {
