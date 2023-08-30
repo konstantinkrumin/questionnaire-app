@@ -8,6 +8,19 @@ import Question from '../components/Question';
 import { getQuestions, submitQuestionnaire } from '../apis/questionnaire';
 import { IQuestion, IQuestionnaireAnswer, IQuestionnaireResponse } from '../types';
 
+const CenteredContainer: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+	<Box
+		padding={8}
+		display="flex"
+		alignItems="center"
+		flexDirection="column"
+		justifyContent="center"
+		style={{ backgroundColor: 'pink' }}
+	>
+		{children}
+	</Box>
+);
+
 interface QuestionnaireProps {}
 
 const Questionnaire: React.FC<QuestionnaireProps> = () => {
@@ -95,32 +108,44 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	};
 
 	if (isLoading) {
-		return <Typography variant="h5">Loading...</Typography>;
+		return (
+			<CenteredContainer>
+				<Typography variant="h5">Loading...</Typography>
+			</CenteredContainer>
+		);
 	}
 
 	if (isError) {
 		return (
-			<Typography variant="h5">
-				It did not go according to the plan... Unfortunately, we are experiencing some
-				issues. Please reload this page and try again
-			</Typography>
+			<CenteredContainer>
+				<Typography variant="h5">
+					It did not go according to the plan... Unfortunately, we are experiencing some
+					issues. Please reload this page and try again
+				</Typography>
+			</CenteredContainer>
 		);
 	}
 
 	if (isCompleted) {
 		return (
-			<Typography variant="h5">
-				Your application is completed! We will email you once we review it
-			</Typography>
+			<CenteredContainer>
+				<Typography variant="h5">
+					Your application is completed! We will email you once we review it
+				</Typography>
+			</CenteredContainer>
 		);
 	}
 
 	if (!questionnaireData) {
-		return <Typography variant="h5">No questions to show</Typography>;
+		return (
+			<CenteredContainer>
+				<Typography variant="h5">No questions to show</Typography>
+			</CenteredContainer>
+		);
 	}
 
 	return (
-		<>
+		<CenteredContainer>
 			<Typography p={2} variant="h5">
 				Job Application
 			</Typography>
@@ -163,7 +188,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 			<Typography p={2}>
 				Question {currentQuestion + 1}/{questionsCount}
 			</Typography>
-		</>
+		</CenteredContainer>
 	);
 };
 

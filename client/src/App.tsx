@@ -4,14 +4,7 @@ import Box from '@mui/material/Box';
 import Questionnaire from './layouts/Questionnaire';
 
 const CenteredContainer: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-	<Box
-		display="flex"
-		flexDirection="column"
-		alignItems="center"
-		justifyContent="center"
-		height="100vh"
-		padding="16px"
-	>
+	<Box height="100vh" display="flex" alignItems="center" justifyContent="center">
 		{children}
 	</Box>
 );
