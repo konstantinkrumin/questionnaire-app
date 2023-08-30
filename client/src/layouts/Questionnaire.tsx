@@ -36,6 +36,11 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 			});
 	}, []);
 
+	const disableNextBtn = (question: IQuestion) => {
+		if (question.isRequired && question.answer?.[0] === '') return true;
+		return false;
+	};
+
 	const handleNext = () => {
 		if (currentQuestion < questionsCount - 1) {
 			setCurrentQuestion(currQuestion => currQuestion + 1);
@@ -64,12 +69,16 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	};
 
 	const handleSubmit = () => {
-		const answers: IQuestionnaireAnswer[] = questionnaireData?.map(questionnaireItem => {
-			return {
-				questionId: questionnaireItem.id,
-				answer: questionnaireItem.answer
-			};
-		});
+		const answers: IQuestionnaireAnswer[] = questionnaireData
+			?.filter(item => {
+				return item?.answer?.[0] !== '';
+			})
+			?.map(item => {
+				return {
+					questionId: item.id,
+					answer: item.answer
+				};
+			});
 
 		const responseBody: IQuestionnaireResponse = {
 			userId: 123,
@@ -123,27 +132,33 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 							questionInfo={question}
 							onQuestionnaireDataChange={handleQuestionnaireDataChange}
 						/>
+
+						<Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
+							{currentQuestion !== 0 && (
+								<Button variant="contained" onClick={() => handleBack()}>
+									Back
+								</Button>
+							)}
+
+							{currentQuestion < questionsCount - 1 && (
+								<Button
+									variant="contained"
+									disabled={disableNextBtn(question)}
+									onClick={() => handleNext()}
+								>
+									Next
+								</Button>
+							)}
+
+							{currentQuestion === questionsCount - 1 && (
+								<Button variant="contained" onClick={() => handleSubmit()}>
+									Submit
+								</Button>
+							)}
+						</Box>
 					</Box>
 				);
 			})}
-
-			<Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
-				<Button variant="contained" onClick={() => handleBack()}>
-					Back
-				</Button>
-
-				{currentQuestion < questionsCount - 1 && (
-					<Button variant="contained" onClick={() => handleNext()}>
-						Next
-					</Button>
-				)}
-
-				{currentQuestion === questionsCount - 1 && (
-					<Button variant="contained" onClick={() => handleSubmit()}>
-						Submit
-					</Button>
-				)}
-			</Box>
 
 			<Typography p={2}>
 				Question {currentQuestion + 1}/{questionsCount}
