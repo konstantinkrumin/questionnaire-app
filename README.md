@@ -1,7 +1,5 @@
 # Questionnaire App
 
-## To start the app locally
-
 Start the server locally:
 
 ```bash
