@@ -38,9 +38,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 				alignItems: 'center'
 			}}
 		>
-			<Typography p={2} variant="h6">
-				{questionInfo.text}
-			</Typography>
+			<Typography p={2}>{questionInfo.text}</Typography>
 
 			{questionInfo.displayStyle === DisplayStyleType.Radio && (
 				<RadioButtonsGroup

@@ -54,17 +54,8 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 		return false;
 	};
 
-	const handleNext = () => {
-		if (currentQuestion < questionsCount - 1) {
-			setCurrentQuestion(currQuestion => currQuestion + 1);
-		}
-	};
-
-	const handleBack = () => {
-		if (currentQuestion >= 1) {
-			setCurrentQuestion(currQuestion => currQuestion - 1);
-		}
-	};
+	const handleNext = () => setCurrentQuestion(currQuestion => currQuestion + 1);
+	const handleBack = () => setCurrentQuestion(currQuestion => currQuestion - 1);
 
 	const handleQuestionnaireDataChange = (questionInfo: IQuestion) => {
 		const tempQuestionnaireData = questionnaireData.map(questionnaireItem => {
