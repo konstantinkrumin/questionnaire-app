@@ -4,7 +4,7 @@ import {
 	IQuestionTextual,
 	IQuestionPredefined,
 	QuestionType,
-	IQuestionnaireResponseBody,
+	IQuestionnaireResponse,
 	DisplayStyleType,
 	IQuestion
 } from '../types';
@@ -137,7 +137,7 @@ const getQuestions = (_: Request, res: Response) => {
 };
 
 const submitQuestionnaire = (req: Request, res: Response) => {
-	const body: IQuestionnaireResponseBody = req.body;
+	const body: IQuestionnaireResponse = req.body;
 
 	try {
 		return res.status(201).json({

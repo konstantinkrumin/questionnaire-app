@@ -38,7 +38,7 @@ export interface IQuestionnaireAnswer {
 	answer: string[];
 }
 
-export interface IQuestionnaireResponseBody {
+export interface IQuestionnaireResponse {
 	userId: number;
 	answers: IQuestionnaireAnswer[];
 }

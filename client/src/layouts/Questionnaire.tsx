@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import Question from '../components/Question';
-import { getQuestions } from '../apis/questionnaire';
-import { IQuestion, IQuestionnaireAnswer, IQuestionnaireResponseBody } from '../types';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import { getQuestions, submitQuestionnaire } from '../apis/questionnaire';
+import { IQuestion, IQuestionnaireAnswer, IQuestionnaireResponse } from '../types';
 
 interface QuestionnaireProps {}
 
@@ -69,12 +69,21 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 			};
 		});
 
-		const responseBody: IQuestionnaireResponseBody = {
+		const responseBody: IQuestionnaireResponse = {
 			userId: 123,
 			answers
 		};
 
-		console.log(responseBody);
+		submitQuestionnaire(responseBody)
+			.then(result => {
+				console.log('RESULT');
+				console.log(result);
+			})
+			.catch(err => {
+				console.log(err);
+
+				setIsLoading(false);
+			});
 	};
 
 	if (isLoading) {
