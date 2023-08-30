@@ -16,6 +16,7 @@ interface IQuestionBase {
 	id: number;
 	text: string;
 	isRequired: boolean;
+	answer: string[];
 }
 
 export interface IQuestionTextual extends IQuestionBase {
@@ -34,10 +35,10 @@ export type IQuestion = IQuestionTextual | IQuestionPredefined;
 
 export interface IQuestionnaireAnswer {
 	questionId: number;
-	answer: string | string[];
+	answer: string[];
 }
 
-export interface IQuestionnaireResponseBody {
+export interface IQuestionnaireResponse {
 	userId: number;
 	answers: IQuestionnaireAnswer[];
 }

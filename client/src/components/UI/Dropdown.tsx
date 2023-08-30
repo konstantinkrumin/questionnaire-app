@@ -1,4 +1,3 @@
-import * as React from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
@@ -18,7 +17,13 @@ const Dropdown: React.FC<DropdownProps> = ({ input, questionInfo, onInputChange 
 
 	return (
 		<FormControl fullWidth>
-			<Select id="select" labelId="select-label" value={input} onChange={handleInputChange}>
+			<Select
+				id="select"
+				labelId="select-label"
+				value={input}
+				defaultValue={questionInfo?.answerOptions?.[0]}
+				onChange={handleInputChange}
+			>
 				{questionInfo?.answerOptions?.map((answerOption, idx) => {
 					return (
 						<MenuItem key={idx} value={answerOption}>

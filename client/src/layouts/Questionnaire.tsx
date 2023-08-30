@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
+
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import Question from '../components/Question';
-import { getQuestions } from '../apis/questionnaire';
-import { IQuestion, IQuestionnaireAnswer } from '../types';
+import { getQuestions, submitQuestionnaire } from '../apis/questionnaire';
+import { IQuestion, IQuestionnaireAnswer, IQuestionnaireResponse } from '../types';
 
 interface QuestionnaireProps {}
 
 const Questionnaire: React.FC<QuestionnaireProps> = () => {
+	const [isCompleted, setIsCompleted] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isError, setIsError] = useState<boolean>(false);
 
-	const [questions, setQuestions] = useState<IQuestion[]>();
-	const [answers, setAnswers] = useState<IQuestionnaireAnswer[]>([]);
+	const [questionnaireData, setQuestionnaireData] = useState<IQuestion[]>([]);
 
-	const [currentStep, setCurrentStep] = useState<number>(1);
+	const [currentQuestion, setCurrentQuestion] = useState<number>(0);
 	const [questionsCount, setQuestionsCount] = useState<number>(0);
 
 	useEffect(() => {
@@ -21,53 +25,128 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 
 		getQuestions()
 			.then(result => {
-				if (result.questions) setQuestions(result.questions);
+				if (result.questions) setQuestionnaireData(result.questions);
 				if (result.count) setQuestionsCount(result.count);
 
 				setIsLoading(false);
 			})
-			.catch(err => {
-				console.log(err);
-
+			.catch(() => {
+				setIsError(true);
 				setIsLoading(false);
 			});
 	}, []);
 
-	const handleStepChange = (type: 'next' | 'back', questionAnswer: IQuestionnaireAnswer) => {
-		if (type === 'next' && currentStep < questionsCount) {
-			setCurrentStep(currentStep + 1);
-			setAnswers([...answers, questionAnswer]);
-		}
-
-		if (type === 'back' && currentStep > 1) {
-			setCurrentStep(currentStep - 1);
-
-			const tempAnswers = [...answers].filter(
-				answer => answer.questionId !== questionAnswer.questionId
-			);
-
-			setAnswers(tempAnswers);
+	const handleNext = () => {
+		if (currentQuestion < questionsCount - 1) {
+			setCurrentQuestion(currQuestion => currQuestion + 1);
 		}
 	};
 
+	const handleBack = () => {
+		if (currentQuestion >= 1) {
+			setCurrentQuestion(currQuestion => currQuestion - 1);
+		}
+	};
+
+	const handleQuestionnaireDataChange = (questionInfo: IQuestion) => {
+		const tempQuestionnaireData = questionnaireData.map(questionnaireItem => {
+			if (questionnaireItem.id === questionInfo.id) {
+				return {
+					...questionnaireItem,
+					answer: questionInfo.answer
+				};
+			}
+
+			return questionnaireItem;
+		});
+
+		setQuestionnaireData(tempQuestionnaireData);
+	};
+
+	const handleSubmit = () => {
+		const answers: IQuestionnaireAnswer[] = questionnaireData?.map(questionnaireItem => {
+			return {
+				questionId: questionnaireItem.id,
+				answer: questionnaireItem.answer
+			};
+		});
+
+		const responseBody: IQuestionnaireResponse = {
+			userId: 123,
+			answers
+		};
+
+		submitQuestionnaire(responseBody)
+			.then(() => {
+				setIsCompleted(true);
+			})
+			.catch(() => {
+				setIsError(true);
+			});
+	};
+
 	if (isLoading) {
-		return <Typography variant="h5">Loading</Typography>;
+		return <Typography variant="h5">Loading...</Typography>;
 	}
 
-	if (!questions) {
+	if (isError) {
+		return (
+			<Typography variant="h5">
+				It did not go according to the plan... Unfortunately, we are experiencing some
+				issues. Please reload this page and try again
+			</Typography>
+		);
+	}
+
+	if (isCompleted) {
+		return (
+			<Typography variant="h5">
+				Your application is completed! We will email you once we review it
+			</Typography>
+		);
+	}
+
+	if (!questionnaireData) {
 		return <Typography variant="h5">No questions to show</Typography>;
 	}
 
 	return (
 		<>
 			<Typography p={2} variant="h5">
-				Questionnaire Title
+				Job Application
 			</Typography>
 
-			<Question questionInfo={questions[currentStep - 1]} onStepChange={handleStepChange} />
+			{questionnaireData?.map((question, idx) => {
+				return (
+					<Box key={question.id} hidden={idx !== currentQuestion}>
+						<Question
+							questionInfo={question}
+							onQuestionnaireDataChange={handleQuestionnaireDataChange}
+						/>
+					</Box>
+				);
+			})}
+
+			<Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
+				<Button variant="contained" onClick={() => handleBack()}>
+					Back
+				</Button>
+
+				{currentQuestion < questionsCount - 1 && (
+					<Button variant="contained" onClick={() => handleNext()}>
+						Next
+					</Button>
+				)}
+
+				{currentQuestion === questionsCount - 1 && (
+					<Button variant="contained" onClick={() => handleSubmit()}>
+						Submit
+					</Button>
+				)}
+			</Box>
 
 			<Typography p={2}>
-				Question {currentStep}/{questionsCount}
+				Question {currentQuestion + 1}/{questionsCount}
 			</Typography>
 		</>
 	);
