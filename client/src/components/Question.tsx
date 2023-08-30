@@ -66,7 +66,11 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 
 			{(questionInfo.displayStyle === DisplayStyleType.Textfield ||
 				questionInfo.displayStyle === DisplayStyleType.Textarea) && (
-				<Textfield input={questionInfo?.answer?.[0]} onInputChange={handleInputChange} />
+				<Textfield
+					type={questionInfo.displayStyle}
+					input={questionInfo?.answer?.[0]}
+					onInputChange={handleInputChange}
+				/>
 			)}
 		</Box>
 	);

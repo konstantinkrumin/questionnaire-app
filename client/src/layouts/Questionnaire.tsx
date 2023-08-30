@@ -13,13 +13,13 @@ const CenteredContainer: React.FC<{ children: React.ReactNode }> = ({ children }
 	<Paper
 		elevation={3}
 		style={{
-			padding: 36,
+			padding: 24,
 			display: 'flex',
 			alignItems: 'center',
 			flexDirection: 'column',
 			justifyContent: 'center',
 			borderRadius: 16,
-			minWidth: 200,
+			minWidth: 300,
 			minHeight: 150,
 			backgroundColor: '#FCF8FF'
 		}}
@@ -108,7 +108,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	if (isLoading) {
 		return (
 			<CenteredContainer>
-				<Typography variant="h5">Loading...</Typography>
+				<Typography variant="h6">Loading...</Typography>
 			</CenteredContainer>
 		);
 	}
@@ -116,7 +116,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	if (isError) {
 		return (
 			<CenteredContainer>
-				<Typography variant="h5">
+				<Typography>
 					It did not go according to the plan... Unfortunately, we are experiencing some
 					issues. Please reload this page and try again
 				</Typography>
@@ -127,7 +127,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	if (isCompleted) {
 		return (
 			<CenteredContainer>
-				<Typography variant="h5">
+				<Typography variant="h6">
 					Your application is completed! We will email you once we review it
 				</Typography>
 			</CenteredContainer>
@@ -137,7 +137,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	if (!questionnaireData) {
 		return (
 			<CenteredContainer>
-				<Typography variant="h5">No questions to show</Typography>
+				<Typography variant="h6">No questions to show</Typography>
 			</CenteredContainer>
 		);
 	}
