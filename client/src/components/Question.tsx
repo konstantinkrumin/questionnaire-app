@@ -1,10 +1,11 @@
 import Typography from '@mui/material/Typography';
 
-import { IQuestion, DisplayStyleType } from '../types';
-import RadioButtonsGroup from './UI/Radio';
-import Textfield from './UI/Textfield';
 import Dropdown from './UI/Dropdown';
+import Textfield from './UI/Textfield';
 import CheckboxGroup from './UI/Checkbox';
+import RadioButtonsGroup from './UI/Radio';
+
+import { IQuestion, DisplayStyleType } from '../types';
 
 interface QuestionProps {
 	questionInfo: IQuestion;
@@ -15,8 +16,14 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 	const handleInputChange = (input: string | string[]) => {
 		const tempQuestionInfo = structuredClone(questionInfo);
 
-		if (Array.isArray(input)) tempQuestionInfo.answer = [...input];
-		if (typeof input === 'string') tempQuestionInfo.answer = [input];
+		if (Array.isArray(input)) {
+			const tempInput = input.filter(item => item !== '');
+			tempQuestionInfo.answer = [...tempInput];
+		}
+
+		if (typeof input === 'string') {
+			tempQuestionInfo.answer = [input];
+		}
 
 		onQuestionnaireDataChange(tempQuestionInfo);
 	};
