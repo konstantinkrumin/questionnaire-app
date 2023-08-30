@@ -15,11 +15,8 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 	const handleInputChange = (input: string | string[]) => {
 		const tempQuestionInfo = structuredClone(questionInfo);
 
-		console.log('INPUT');
-		console.log(input);
-
 		if (Array.isArray(input)) tempQuestionInfo.answer = [...input];
-		if (typeof input === 'string') tempQuestionInfo.answer = input;
+		if (typeof input === 'string') tempQuestionInfo.answer = [input];
 
 		onQuestionnaireDataChange(tempQuestionInfo);
 	};
@@ -30,7 +27,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 
 			{questionInfo.displayStyle === DisplayStyleType.Radio && (
 				<RadioButtonsGroup
-					input={questionInfo.answer as string}
+					input={questionInfo?.answer?.[0]}
 					questionInfo={questionInfo}
 					onInputChange={handleInputChange}
 				/>
@@ -38,7 +35,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 
 			{questionInfo.displayStyle === DisplayStyleType.Checkbox && (
 				<CheckboxGroup
-					selectedOptions={(questionInfo.answer as string[]) ?? []}
+					selectedOptions={questionInfo.answer}
 					questionInfo={questionInfo}
 					onSelectedOptionsChange={handleInputChange}
 				/>
@@ -46,7 +43,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 
 			{questionInfo.displayStyle === DisplayStyleType.Dropdown && (
 				<Dropdown
-					input={questionInfo.answer as string}
+					input={questionInfo?.answer?.[0]}
 					questionInfo={questionInfo}
 					onInputChange={handleInputChange}
 				/>
@@ -54,10 +51,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 
 			{(questionInfo.displayStyle === DisplayStyleType.Textfield ||
 				questionInfo.displayStyle === DisplayStyleType.Textarea) && (
-				<Textfield
-					input={questionInfo.answer as string}
-					onInputChange={handleInputChange}
-				/>
+				<Textfield input={questionInfo?.answer?.[0]} onInputChange={handleInputChange} />
 			)}
 		</>
 	);

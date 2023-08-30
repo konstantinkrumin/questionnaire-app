@@ -16,28 +16,32 @@ const getQuestions = (_: Request, res: Response) => {
 			text: 'What is your full name?',
 			displayStyle: DisplayStyleType.Textfield,
 			type: QuestionType.Text,
-			isRequired: true
+			isRequired: true,
+			answer: []
 		},
 		{
 			id: 2,
 			text: 'What is your current job title?',
 			displayStyle: DisplayStyleType.Textfield,
 			type: QuestionType.Text,
-			isRequired: true
+			isRequired: true,
+			answer: []
 		},
 		{
 			id: 7,
 			text: 'Tell us what drives you daily?',
 			displayStyle: DisplayStyleType.Textarea,
 			type: QuestionType.Text,
-			isRequired: true
+			isRequired: true,
+			answer: []
 		},
 		{
 			id: 8,
 			text: 'Is there anything else you would like to share with us?',
 			displayStyle: DisplayStyleType.Textarea,
 			type: QuestionType.Text,
-			isRequired: false
+			isRequired: false,
+			answer: []
 		}
 	];
 
@@ -55,7 +59,8 @@ const getQuestions = (_: Request, res: Response) => {
 				'DevOps Engineer',
 				'Frontend Team Lead',
 				'Engineering Manager'
-			]
+			],
+			answer: []
 		},
 		{
 			id: 4,
@@ -63,7 +68,8 @@ const getQuestions = (_: Request, res: Response) => {
 			displayStyle: DisplayStyleType.Radio,
 			type: QuestionType.SingleChoice,
 			isRequired: false,
-			answerOptions: ['Core', 'Analytics', 'Integrations']
+			answerOptions: ['Core', 'Analytics', 'Integrations'],
+			answer: []
 		},
 		{
 			id: 5,
@@ -84,7 +90,8 @@ const getQuestions = (_: Request, res: Response) => {
 				'Rust',
 				'Scala',
 				'Go'
-			]
+			],
+			answer: []
 		},
 		{
 			id: 6,
@@ -108,7 +115,8 @@ const getQuestions = (_: Request, res: Response) => {
 				'PostgreSQL',
 				'MySQL',
 				'GraphQL'
-			]
+			],
+			answer: []
 		}
 	];
 

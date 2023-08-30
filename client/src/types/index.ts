@@ -16,7 +16,7 @@ interface IQuestionBase {
 	id: number;
 	text: string;
 	isRequired: boolean;
-	answer?: string | string[];
+	answer: string[];
 }
 
 export interface IQuestionTextual extends IQuestionBase {

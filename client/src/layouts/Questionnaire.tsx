@@ -47,7 +47,18 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	};
 
 	const handleQuestionnaireDataChange = (questionInfo: IQuestion) => {
-		console.log(questionInfo);
+		const tempQuestionnaireData = questionnaireData.map(questionnaireItem => {
+			if (questionnaireItem.id === questionInfo.id) {
+				return {
+					...questionnaireItem,
+					answer: questionInfo.answer
+				};
+			}
+
+			return questionnaireItem;
+		});
+
+		setQuestionnaireData(tempQuestionnaireData);
 	};
 
 	if (isLoading) {
