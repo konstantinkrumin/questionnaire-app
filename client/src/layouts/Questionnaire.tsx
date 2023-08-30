@@ -85,7 +85,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	};
 
 	if (isLoading) {
-		return <Typography variant="h5">Loading</Typography>;
+		return <Typography variant="h5">Loading...</Typography>;
 	}
 
 	if (isError) {

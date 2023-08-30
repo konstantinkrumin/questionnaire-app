@@ -18,7 +18,13 @@ const Dropdown: React.FC<DropdownProps> = ({ input, questionInfo, onInputChange 
 
 	return (
 		<FormControl fullWidth>
-			<Select id="select" labelId="select-label" value={input} onChange={handleInputChange}>
+			<Select
+				id="select"
+				labelId="select-label"
+				value={input}
+				defaultValue={questionInfo?.answerOptions?.[0] ?? ''}
+				onChange={handleInputChange}
+			>
 				{questionInfo?.answerOptions?.map((answerOption, idx) => {
 					return (
 						<MenuItem key={idx} value={answerOption}>
