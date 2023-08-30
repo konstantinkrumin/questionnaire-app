@@ -1,15 +1,19 @@
 {
 	"name": "server",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Small mock server with couple APIs",
 	"main": "index.js",
 	"scripts": {
 		"build": "npx tsc",
 		"start": "node dist/index.js",
-		"dev": "nodemon index.ts"
+		"dev": "ts-node-dev --transpile-only index.ts"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": [
+		"NodeJS",
+		"ExpressJS",
+		"Typescript"
+	],
+	"author": "Konstantin Krumin",
 	"license": "ISC",
 	"dependencies": {
 		"body-parser": "^1.20.2",
