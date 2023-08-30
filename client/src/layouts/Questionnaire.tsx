@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
@@ -9,16 +10,22 @@ import { getQuestions, submitQuestionnaire } from '../apis/questionnaire';
 import { IQuestion, IQuestionnaireAnswer, IQuestionnaireResponse } from '../types';
 
 const CenteredContainer: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-	<Box
-		padding={8}
-		display="flex"
-		alignItems="center"
-		flexDirection="column"
-		justifyContent="center"
-		style={{ backgroundColor: 'pink' }}
+	<Paper
+		elevation={3}
+		style={{
+			padding: 36,
+			display: 'flex',
+			alignItems: 'center',
+			flexDirection: 'column',
+			justifyContent: 'center',
+			borderRadius: 16,
+			minWidth: 200,
+			minHeight: 150,
+			backgroundColor: '#FCF8FF'
+		}}
 	>
 		{children}
-	</Box>
+	</Paper>
 );
 
 interface QuestionnaireProps {}

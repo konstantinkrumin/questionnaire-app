@@ -28,7 +28,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
 
 	return (
 		<FormGroup>
-			<Grid container spacing={2}>
+			<Grid container spacing={1}>
 				{options.map((answerOption, idx) => {
 					const isChecked = selectedOptions?.includes(answerOption);
 
