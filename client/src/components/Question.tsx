@@ -15,7 +15,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 	const handleInputChange = (input: string | string[]) => {
 		const tempQuestionInfo = structuredClone(questionInfo);
 
-		console.log('INPUT')
+		console.log('INPUT');
 		console.log(input);
 
 		if (Array.isArray(input)) tempQuestionInfo.answer = [...input];
@@ -38,7 +38,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 
 			{questionInfo.displayStyle === DisplayStyleType.Checkbox && (
 				<CheckboxGroup
-					selectedOptions={questionInfo.answer as string[]}
+					selectedOptions={(questionInfo.answer as string[]) ?? []}
 					questionInfo={questionInfo}
 					onSelectedOptionsChange={handleInputChange}
 				/>
