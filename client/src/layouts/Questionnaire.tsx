@@ -64,12 +64,14 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 				Job Application
 			</Typography>
 
-			{questionnaireData?.map(question => {
+			{questionnaireData?.map((question, idx) => {
 				return (
-					<Question
-						questionInfo={question}
-						onQuestionnaireDataChange={handleQuestionnaireDataChange}
-					/>
+					<Box key={question.id} hidden={idx !== currentQuestion}>
+						<Question
+							questionInfo={question}
+							onQuestionnaireDataChange={handleQuestionnaireDataChange}
+						/>
+					</Box>
 				);
 			})}
 

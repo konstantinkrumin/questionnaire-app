@@ -47,7 +47,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 					questionInfo={questionInfo}
 					onInputChange={handleInputChange}
 				/>
-			)}
+			)} */}
 
 			{(questionInfo.displayStyle === DisplayStyleType.Textfield ||
 				questionInfo.displayStyle === DisplayStyleType.Textarea) && (
@@ -55,7 +55,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 					input={questionInfo.answer as string}
 					onInputChange={handleInputChange}
 				/>
-			)} */}
+			)}
 		</>
 	);
 };
