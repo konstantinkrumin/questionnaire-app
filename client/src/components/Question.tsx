@@ -15,6 +15,9 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 	const handleInputChange = (input: string | string[]) => {
 		const tempQuestionInfo = structuredClone(questionInfo);
 
+		console.log('INPUT')
+		console.log(input);
+
 		if (Array.isArray(input)) tempQuestionInfo.answer = [...input];
 		if (typeof input === 'string') tempQuestionInfo.answer = input;
 
@@ -25,7 +28,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 		<>
 			<Typography variant="h6">{questionInfo.text}</Typography>
 
-			{/* {questionInfo.displayStyle === DisplayStyleType.Radio && (
+			{questionInfo.displayStyle === DisplayStyleType.Radio && (
 				<RadioButtonsGroup
 					input={questionInfo.answer as string}
 					questionInfo={questionInfo}
@@ -47,7 +50,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 					questionInfo={questionInfo}
 					onInputChange={handleInputChange}
 				/>
-			)} */}
+			)}
 
 			{(questionInfo.displayStyle === DisplayStyleType.Textfield ||
 				questionInfo.displayStyle === DisplayStyleType.Textarea) && (
