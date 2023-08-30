@@ -1,4 +1,5 @@
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 import Dropdown from './UI/Dropdown';
 import Textfield from './UI/Textfield';
@@ -29,8 +30,17 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 	};
 
 	return (
-		<>
-			<Typography variant="h6">{questionInfo.text}</Typography>
+		<Box
+			sx={{
+				display: 'flex',
+				flexDirection: 'column',
+				justifyContent: 'center',
+				alignItems: 'center'
+			}}
+		>
+			<Typography p={2} variant="h6">
+				{questionInfo.text}
+			</Typography>
 
 			{questionInfo.displayStyle === DisplayStyleType.Radio && (
 				<RadioButtonsGroup
@@ -60,7 +70,7 @@ const Question: React.FC<QuestionProps> = ({ questionInfo, onQuestionnaireDataCh
 				questionInfo.displayStyle === DisplayStyleType.Textarea) && (
 				<Textfield input={questionInfo?.answer?.[0]} onInputChange={handleInputChange} />
 			)}
-		</>
+		</Box>
 	);
 };
 

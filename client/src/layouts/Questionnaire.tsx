@@ -152,13 +152,22 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 
 			{questionnaireData?.map((question, idx) => {
 				return (
-					<Box key={question.id} hidden={idx !== currentQuestion}>
+					<Box p={2} key={question.id} hidden={idx !== currentQuestion}>
 						<Question
 							questionInfo={question}
 							onQuestionnaireDataChange={handleQuestionnaireDataChange}
 						/>
 
-						<Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
+						<Box
+							p={2}
+							sx={{
+								display: 'flex',
+								flexDirection: 'row',
+								justifyContent: 'center',
+								alignItems: 'center',
+								gap: '24px'
+							}}
+						>
 							{currentQuestion !== 0 && (
 								<Button variant="contained" onClick={() => handleBack()}>
 									Back
