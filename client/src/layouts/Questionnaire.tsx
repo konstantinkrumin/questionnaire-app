@@ -12,6 +12,7 @@ interface QuestionnaireProps {}
 const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	const [isCompleted, setIsCompleted] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isError, setIsError] = useState<boolean>(false);
 
 	const [questionnaireData, setQuestionnaireData] = useState<IQuestion[]>([]);
 
@@ -28,9 +29,8 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 
 				setIsLoading(false);
 			})
-			.catch(err => {
-				console.log(err);
-
+			.catch(() => {
+				setIsError(true);
 				setIsLoading(false);
 			});
 	}, []);
@@ -79,13 +79,22 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 			.then(() => {
 				setIsCompleted(true);
 			})
-			.catch(err => {
-				console.log(err);
+			.catch(() => {
+				setIsError(true);
 			});
 	};
 
 	if (isLoading) {
 		return <Typography variant="h5">Loading</Typography>;
+	}
+
+	if (isError) {
+		return (
+			<Typography variant="h5">
+				It did not go according to the plan... Unfortunately, we are experiencing some
+				issues. Please reload this page and try again
+			</Typography>
+		);
 	}
 
 	if (isCompleted) {
@@ -95,6 +104,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 			</Typography>
 		);
 	}
+
 	if (!questionnaireData) {
 		return <Typography variant="h5">No questions to show</Typography>;
 	}
