@@ -10,6 +10,7 @@ import { IQuestion, IQuestionnaireAnswer, IQuestionnaireResponse } from '../type
 interface QuestionnaireProps {}
 
 const Questionnaire: React.FC<QuestionnaireProps> = () => {
+	const [isCompleted, setIsCompleted] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const [questionnaireData, setQuestionnaireData] = useState<IQuestion[]>([]);
@@ -75,14 +76,11 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 		};
 
 		submitQuestionnaire(responseBody)
-			.then(result => {
-				console.log('RESULT');
-				console.log(result);
+			.then(() => {
+				setIsCompleted(true);
 			})
 			.catch(err => {
 				console.log(err);
-
-				setIsLoading(false);
 			});
 	};
 
@@ -90,6 +88,13 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 		return <Typography variant="h5">Loading</Typography>;
 	}
 
+	if (isCompleted) {
+		return (
+			<Typography variant="h5">
+				Your application is completed! We will email you once we review it
+			</Typography>
+		);
+	}
 	if (!questionnaireData) {
 		return <Typography variant="h5">No questions to show</Typography>;
 	}
