@@ -3,17 +3,18 @@ import Typography from '@mui/material/Typography';
 
 import Question from '../components/Question';
 import { getQuestions } from '../apis/questionnaire';
-import { IQuestion, IQuestionnaireAnswer } from '../types';
+import { IQuestion } from '../types';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 interface QuestionnaireProps {}
 
 const Questionnaire: React.FC<QuestionnaireProps> = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	const [questions, setQuestions] = useState<IQuestion[]>();
-	const [answers, setAnswers] = useState<IQuestionnaireAnswer[]>([]);
+	const [questionnaireData, setQuestionnaireData] = useState<IQuestion[]>([]);
 
-	const [currentStep, setCurrentStep] = useState<number>(1);
+	const [currentQuestion, setCurrentQuestion] = useState<number>(0);
 	const [questionsCount, setQuestionsCount] = useState<number>(0);
 
 	useEffect(() => {
@@ -21,7 +22,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 
 		getQuestions()
 			.then(result => {
-				if (result.questions) setQuestions(result.questions);
+				if (result.questions) setQuestionnaireData(result.questions);
 				if (result.count) setQuestionsCount(result.count);
 
 				setIsLoading(false);
@@ -33,41 +34,57 @@ const Questionnaire: React.FC<QuestionnaireProps> = () => {
 			});
 	}, []);
 
-	const handleStepChange = (type: 'next' | 'back', questionAnswer: IQuestionnaireAnswer) => {
-		if (type === 'next' && currentStep < questionsCount) {
-			setCurrentStep(currentStep + 1);
-			setAnswers([...answers, questionAnswer]);
+	const handleNext = () => {
+		if (currentQuestion < questionsCount - 1) {
+			setCurrentQuestion(currQuestion => currQuestion + 1);
 		}
+	};
 
-		if (type === 'back' && currentStep > 1) {
-			setCurrentStep(currentStep - 1);
-
-			const tempAnswers = [...answers].filter(
-				answer => answer.questionId !== questionAnswer.questionId
-			);
-
-			setAnswers(tempAnswers);
+	const handleBack = () => {
+		if (currentQuestion >= 1) {
+			setCurrentQuestion(currQuestion => currQuestion - 1);
 		}
+	};
+
+	const handleQuestionnaireDataChange = (questionInfo: IQuestion) => {
+		console.log(questionInfo);
 	};
 
 	if (isLoading) {
 		return <Typography variant="h5">Loading</Typography>;
 	}
 
-	if (!questions) {
+	if (!questionnaireData) {
 		return <Typography variant="h5">No questions to show</Typography>;
 	}
 
 	return (
 		<>
 			<Typography p={2} variant="h5">
-				Questionnaire Title
+				Job Application
 			</Typography>
 
-			<Question questionInfo={questions[currentStep - 1]} onStepChange={handleStepChange} />
+			{questionnaireData?.map(question => {
+				return (
+					<Question
+						questionInfo={question}
+						onQuestionnaireDataChange={handleQuestionnaireDataChange}
+					/>
+				);
+			})}
+
+			<Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
+				<Button variant="contained" onClick={() => handleBack()}>
+					Back
+				</Button>
+
+				<Button variant="contained" onClick={() => handleNext()}>
+					Next
+				</Button>
+			</Box>
 
 			<Typography p={2}>
-				Question {currentStep}/{questionsCount}
+				Question {currentQuestion + 1}/{questionsCount}
 			</Typography>
 		</>
 	);
